@@ -96,7 +96,7 @@ class CreateSchema < ActiveRecord::Migration
     add_index "order_items", ["order_id"], name: "index_order_items_on_order_id"
   
     create_table "orders", force: :cascade do |t|
-      t.integer  "price"
+      t.integer  "price", default: 0
       t.date     "completed_date"
       t.integer  "state"
       t.integer  "shipping_address"

@@ -1,0 +1,22 @@
+!!!
+.col-sm-4.col-lg-4.col-md-4
+  .thumbnail
+    %img{:alt => "", :src => "http://placehold.it/320x150"}/
+    .caption
+      %h4.pull-right
+        = "#{book.price}$"
+      %h4
+        %a{:href => "#"}
+          = book.title
+      %p 
+        = book.category.title
+      %p
+        = book.author.name
+    .ratings
+      %p.pull-right 15 reviews
+      %p
+        %span.glyphicon.glyphicon-star
+        %span.glyphicon.glyphicon-star
+        %span.glyphicon.glyphicon-star
+        %span.glyphicon.glyphicon-star
+        %span.glyphicon.glyphicon-star

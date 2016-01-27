@@ -96,15 +96,15 @@ ActiveRecord::Schema.define(version: 20160120054002) do
   add_index "order_items", ["order_id"], name: "index_order_items_on_order_id"
 
   create_table "orders", force: :cascade do |t|
-    t.integer  "price"
+    t.integer  "price",            default: 0
     t.date     "completed_date"
     t.integer  "state"
     t.integer  "shipping_address"
     t.integer  "billing_address"
     t.integer  "customer_id"
     t.integer  "credit_card_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
   add_index "orders", ["credit_card_id"], name: "index_orders_on_credit_card_id"

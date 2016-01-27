@@ -10,9 +10,4 @@ RSpec.describe Customer, type: :model do
   it { is_expected.to validate_presence_of(:password) }
   it { is_expected.to validate_confirmation_of(:password) }
   it { is_expected.to validate_uniqueness_of(:email) }
-  
-  describe '#orders_in_progress' do
-     it 'must return orders'
-     it 'must not return finished orders'
-  end
 end
