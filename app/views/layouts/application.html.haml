@@ -1,13 +1,23 @@
-!!!
-%html
-  %head
-    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
-    %title Ss
-    = stylesheet_link_tag    'application', media: 'all'
-    = javascript_include_tag 'application'
-    = csrf_meta_tags
-  %body
-    = yield
-    %script{:src => "https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"}
-    %script{:src => "js/bootstrap.min.js"}
+= render :partial => 'layouts/head'
+%body
+  = render :partial => 'layouts/nav'
+  .container
+    .row
+      .col-sm-12
+        - if notice 
+          .alert.alert-success
+            = notice
+        - if alert  
+          .alert.alert-warning
+            = alert
+    .row
+      .col-md-12
+        = yield
+  .container
+    %hr
+    %footer
+      .row
+        .col-lg-12
+          %p Copyright © Your Website 2014
+  %script{:src => "https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"}
+  %script{:src => "js/bootstrap.min.js"}

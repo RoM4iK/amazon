@@ -1,4 +1,5 @@
 class BooksController < ApplicationController
+  layout "with_sidebar"
   before_action :set_book, only: [:show, :edit, :update, :destroy]
 
   # GET /books
@@ -10,6 +11,8 @@ class BooksController < ApplicationController
   # GET /books/1
   # GET /books/1.json
   def show
+    @book = Book.find(params[:id])
+    @page_title = @book.title
   end
 
   # GET /books/new
@@ -62,7 +65,8 @@ class BooksController < ApplicationController
   end
   
   def category
-    @books = Book.where(category: params[:category]).limit(12)
+    @category = Category.find(params[:category])
+    @books = Book.where(category: @category).limit(12)
   end
 
   private

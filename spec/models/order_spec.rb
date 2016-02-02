@@ -6,7 +6,6 @@ RSpec.describe Order, type: :model do
   it { is_expected.to have_many(:order_items) }
     
   it { is_expected.to validate_presence_of(:state) }
-  it { is_expected.to validate_presence_of(:credit_card) }
   it { is_expected.to validate_presence_of(:customer) }
   
   describe '#add_item' do

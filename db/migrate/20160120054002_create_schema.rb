@@ -76,7 +76,7 @@ class CreateSchema < ActiveRecord::Migration
   
     create_table "customers", force: :cascade do |t|
       t.string   "email"
-      t.string   "password"
+      t.string   "encrypted_password", null: false
       t.string   "first_name"
       t.string   "last_name"
       t.datetime "created_at", null: false

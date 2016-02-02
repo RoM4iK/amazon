@@ -1,4 +1,21 @@
 Rails.application.routes.draw do
+  get 'cart/index'
+
+  devise_for :customers
+  
+  get '/' => 'site#index'
+  get '/about' => 'site#about'
+  get '/contact' => 'site#contact'
+  resources :books do
+    collection do
+      get 'category/:category', action: 'category'
+    end
+  end
+  
+  scope 'cart' do
+    get '/' => 'cart#index'
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -53,11 +70,5 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-  get '/' => 'application#index'
-  resources :books do
-    collection do
-      get 'category/:category', action: 'category'
-    end
-  end
   
 end

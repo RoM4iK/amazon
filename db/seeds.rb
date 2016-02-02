@@ -18,6 +18,6 @@ FactoryGirl.create_list(:author, AUTHORS_COUNT)
 authors = Author.all
 Category.all.each do |category|
   10.times do
-    FactoryGirl.create(:book, author: authors[rand(0..AUTHORS_COUNT)], category: category)
+    FactoryGirl.create(:book, author: authors[rand(0..AUTHORS_COUNT)], category: category, ratings_count: rand(0...5))
   end
 end

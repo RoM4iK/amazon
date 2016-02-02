@@ -1,6 +1,18 @@
-%p#notice= notice
-
-
-= link_to 'Edit', edit_book_path(@book)
-\|
-= link_to 'Back', books_path
+%div
+  .thumbnail
+    %img.img-responsive{:alt => "", :src => "http://placehold.it/800x300"}/
+    .caption-full
+      %h4.pull-right $#{@book.price}
+      %h4
+        %a{:href => "#"}
+        = @book.title
+      %p
+      = @book.description
+    .ratings
+      %p.pull-right #{@book.ratings.count} reviews
+      %p
+        = render partial: "stars", locals: {count: average_rating(@book)}
+  .well
+    .text-right
+      %a.btn.btn-success Leave a Review
+    = render :partial => 'ratings', :collection => @book.ratings, :as => :rating
