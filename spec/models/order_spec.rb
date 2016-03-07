@@ -19,6 +19,25 @@ RSpec.describe Order, type: :model do
     it 'change the total price of order' do
       expect { @order.add_item(@book) }.to change{ @order.price }.from(0).to(@book.price)
     end
+    describe 'adding more than 1 book quantity' do
+      it 'changes order price' do
+        expect { @order.add_item(@book, 2) }.to change{ @order.price }.from(0).to(@book.price * 2)
+      end
+      it 'dont create 2 order items' do
+        expect { @order.add_item(@book, 2) }.to change{ @order.order_items.size }.from(0).to(1)
+      end
+    end
+    describe 'adding book that previosly added' do
+      before do
+        @order.add_item(@book)
+      end
+      it 'dont change the order size' do
+        expect { @order.add_item(@book) }.not_to change{ @order.order_items.size }
+      end
+      it 'changes order price' do
+        expect { @order.add_item(@book) }.to change{ @order.price }.from(@book.price).to(@book.price * 2)
+      end
+    end
   end
   describe '#remove_item' do
     before do
