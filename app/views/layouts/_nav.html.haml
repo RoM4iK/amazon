@@ -19,14 +19,16 @@
         %li
           = link_to("Contact", {controller: "/site", action: "contact"})
       %ul.nav.navbar-nav.navbar-right
-        %li.dropdown
+        %li
+          = link_to('Cart', cart_path)
+        %li
           - if current_customer
             %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
               = current_customer.first_name
               %span.caret
               %ul.dropdown-menu
                 %li
-                  %a{:href => edit_customer_registration_path} Edit profile
+                  = link_to("Edit profile",  edit_customer_registration_path)
                 %li
                   %a{:href => "#"} Something else here
                 %li.divider{:role => "separator"}

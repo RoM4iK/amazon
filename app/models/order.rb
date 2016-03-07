@@ -8,7 +8,6 @@ class Order < ActiveRecord::Base
     has_many :order_items
     
     validates :state, presence: true
-    validates :customer, presence: true
     
 
     def add_item(book, quantity = 1)

@@ -15,5 +15,4 @@
     .ratings
       %p.pull-right= pluralize(book.ratings.count, "review")
       %p= render partial: "books/stars", locals: {count: average_rating(book)}
-    .buy
-      = link_to('Buy', book_path(book), {class: 'btn btn-success'})
+    = add_to_cart_button(book)

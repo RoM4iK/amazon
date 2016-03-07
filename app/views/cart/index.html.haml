@@ -3,3 +3,34 @@
     %h3 Cart is empty.
 - else
     %h3= "You have #{pluralize(@order.order_items.count, 'items')} in your cart."
+    %table.table.table-bordered.table-hover
+        %thead
+            %tr
+                %th
+                    Title
+                %th
+                    Price
+                %th
+                    Quantity
+                %th
+                    Sum
+        %tbody
+            - @order.order_items.each do |item|
+                %tr
+                    %td
+                        = item.book.title
+                    %td
+                        = "#{item.book.price}$"
+                    %td
+                        = item.quantity
+                    %td
+                        = "#{item.price}$"
+        %tfoot
+            %tr
+                %th Total:
+                %th
+                %th
+                    = @order.order_items.sum(:quantity)
+                %th
+                    = "#{@order.price}$"
+                        

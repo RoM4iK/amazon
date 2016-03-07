@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  get 'cart/index'
-
   devise_for :customers
+  
+  root 'site#index'
   
   get '/' => 'site#index'
   get '/about' => 'site#about'
@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   end
   
   scope 'cart' do
-    get '/' => 'cart#index'
+    get '/' => 'cart#index', as: 'cart'
     post 'add' => 'cart#add'
   end
 
