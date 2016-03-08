@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160130120944) do
+ActiveRecord::Schema.define(version: 20160308034950) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "addresses", force: :cascade do |t|
     t.string   "address"
@@ -42,8 +45,8 @@ ActiveRecord::Schema.define(version: 20160130120944) do
     t.datetime "updated_at",  null: false
   end
 
-  add_index "books", ["author_id"], name: "index_books_on_author_id"
-  add_index "books", ["category_id"], name: "index_books_on_category_id"
+  add_index "books", ["author_id"], name: "index_books_on_author_id", using: :btree
+  add_index "books", ["category_id"], name: "index_books_on_category_id", using: :btree
 
   create_table "categories", force: :cascade do |t|
     t.string   "title"
@@ -58,7 +61,7 @@ ActiveRecord::Schema.define(version: 20160130120944) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "countries", ["address_id"], name: "index_countries_on_address_id"
+  add_index "countries", ["address_id"], name: "index_countries_on_address_id", using: :btree
 
   create_table "credit_cards", force: :cascade do |t|
     t.integer  "number"
@@ -72,7 +75,7 @@ ActiveRecord::Schema.define(version: 20160130120944) do
     t.datetime "updated_at",       null: false
   end
 
-  add_index "credit_cards", ["customer_id"], name: "index_credit_cards_on_customer_id"
+  add_index "credit_cards", ["customer_id"], name: "index_credit_cards_on_customer_id", using: :btree
 
   create_table "customers", force: :cascade do |t|
     t.string   "email"
@@ -84,13 +87,10 @@ ActiveRecord::Schema.define(version: 20160130120944) do
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.string   "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
-    t.string   "unconfirmed_email"
+    t.boolean  "admin"
   end
 
-  add_index "customers", ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
+  add_index "customers", ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true, using: :btree
 
   create_table "order_items", force: :cascade do |t|
     t.integer  "price"
@@ -101,8 +101,8 @@ ActiveRecord::Schema.define(version: 20160130120944) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "order_items", ["book_id"], name: "index_order_items_on_book_id"
-  add_index "order_items", ["order_id"], name: "index_order_items_on_order_id"
+  add_index "order_items", ["book_id"], name: "index_order_items_on_book_id", using: :btree
+  add_index "order_items", ["order_id"], name: "index_order_items_on_order_id", using: :btree
 
   create_table "orders", force: :cascade do |t|
     t.integer  "price",            default: 0
@@ -116,8 +116,8 @@ ActiveRecord::Schema.define(version: 20160130120944) do
     t.datetime "updated_at",                   null: false
   end
 
-  add_index "orders", ["credit_card_id"], name: "index_orders_on_credit_card_id"
-  add_index "orders", ["customer_id"], name: "index_orders_on_customer_id"
+  add_index "orders", ["credit_card_id"], name: "index_orders_on_credit_card_id", using: :btree
+  add_index "orders", ["customer_id"], name: "index_orders_on_customer_id", using: :btree
 
   create_table "ratings", force: :cascade do |t|
     t.text     "text"
@@ -128,7 +128,7 @@ ActiveRecord::Schema.define(version: 20160130120944) do
     t.datetime "updated_at",  null: false
   end
 
-  add_index "ratings", ["book_id"], name: "index_ratings_on_book_id"
-  add_index "ratings", ["customer_id"], name: "index_ratings_on_customer_id"
+  add_index "ratings", ["book_id"], name: "index_ratings_on_book_id", using: :btree
+  add_index "ratings", ["customer_id"], name: "index_ratings_on_customer_id", using: :btree
 
 end

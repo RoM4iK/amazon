@@ -12,6 +12,10 @@ class Customer < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
   
+  def admin?
+    self.admin
+  end
+  
   def current_order
      orders.where("state = #{Order::PAYMENT}").first || orders.create!(state: Order::PAYMENT)
   end

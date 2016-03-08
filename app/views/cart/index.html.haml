@@ -22,7 +22,7 @@
                     %td
                         = "#{item.book.price}$"
                     %td
-                        = item.quantity
+                        = render partial: "cart/quantity_form", locals: {item: item}
                     %td
                         = "#{item.price}$"
         %tfoot

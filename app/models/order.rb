@@ -21,6 +21,16 @@ class Order < ActiveRecord::Base
         update_price!
     end
     
+    def update_quantity(order_item, quantity)
+      if (quantity == 0)
+        order_item.delete
+      else
+        order_item.update_quantity(quantity)
+        order_item.save
+      end
+      update_price!
+    end
+    
     def remove_item(order_item, quantity = 1)
        order_items.delete(order_item)
        update_price!

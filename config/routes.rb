@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :customers
   
   root 'site#index'
@@ -15,6 +16,7 @@ Rails.application.routes.draw do
   scope 'cart' do
     get '/' => 'cart#index', as: 'cart'
     post 'add' => 'cart#add'
+    post 'change' => 'cart#change_quantity'
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

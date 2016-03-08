@@ -1,4 +1,5 @@
 class CartController < ApplicationController
+  include ApplicationHelper
   before_action :get_current_order
   
   def index
@@ -11,27 +12,15 @@ class CartController < ApplicationController
     redirect_to :root
   end
   
+  def change_quantity
+    order_item = @order.order_items.where(book: params[:book]).first
+    @order.update_quantity(order_item, params[:quantity].to_i)
+    redirect_to({action: :index})
+  end
+  
   private
   
   def get_current_order
-    if current_customer.present?
-      customer_current_order = current_customer.current_order
-      if (session[:cart_id])
-        customer_current_order.delete
-        @order = Order.find(session[:cart_id])
-        @order.customer = current_customer
-        @order.save
-        session[:cart_id] = nil
-      else
-        @order = customer_current_order
-      end
-    else
-      if (session[:cart_id])
-        @order = Order.find(session[:cart_id])
-      else
-        @order = Order.create!(state: Order::PAYMENT)
-        session[:cart_id] = @order.id
-      end
-    end
+    @order = current_order
   end
 end

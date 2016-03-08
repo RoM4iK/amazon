@@ -20,7 +20,7 @@
           = link_to("Contact", {controller: "/site", action: "contact"})
       %ul.nav.navbar-nav.navbar-right
         %li
-          = link_to('Cart', cart_path)
+          = link_to("Cart (#{cart_total}$)", cart_path)
         %li
           - if current_customer
             %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}

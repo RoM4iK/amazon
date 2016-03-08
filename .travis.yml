@@ -1,0 +1,13 @@
+language: ruby
+rvm:
+  - 2.2.1
+env:
+  - DB=postgresql
+script:
+  - RAILS_ENV=test bundle exec rake db:migrate
+  - bundle exec rspec
+before_script:
+  - psql -c 'create database amazon_test' -U postgres
+addons:
+  code_climate:
+    repo_token: 5f66f81f3b2a275f301c0c49d6ea6a4229088f45c42660b7254085655f217a45
