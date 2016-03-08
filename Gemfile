@@ -51,7 +51,9 @@ group :test do
   gem 'shoulda-matchers'
   gem 'database_cleaner'
   gem 'capybara'
+  gem "codeclimate-test-reporter", require: nil
 end
+
 
 
 group :development do
