@@ -22,7 +22,7 @@ class Order < ActiveRecord::Base
     end
     
     def update_quantity(order_item, quantity)
-      if (quantity == 0)
+      if (quantity <= 0)
         order_item.delete
       else
         order_item.update_quantity(quantity)

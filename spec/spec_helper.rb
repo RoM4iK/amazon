@@ -11,6 +11,14 @@ RSpec.configure do |config|
   config.mock_with :rspec do |mocks|
     mocks.verify_partial_doubles = true
   end
+
+	config.around(:each, :not_verify_doubles) do |ex|
+    config.mock_with :rspec do |mocks|
+      mocks.verify_partial_doubles = false
+      ex.run
+      mocks.verify_partial_doubles = true
+    end
+  end
 end
 
 CodeClimate::TestReporter.start

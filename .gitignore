@@ -15,3 +15,7 @@
 /log/*
 !/log/.keep
 /tmp
+
+#Ingore ruby gemset and version
+.ruby-gemset
+.ruby-version
