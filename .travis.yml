@@ -8,6 +8,7 @@ script:
   - bundle exec rspec
 before_script:
   - psql -c 'create database amazon_test' -U postgres
+  - cp config/database.yml.travis config/database.yml
 addons:
   code_climate:
     repo_token: 5f66f81f3b2a275f301c0c49d6ea6a4229088f45c42660b7254085655f217a45
