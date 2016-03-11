@@ -16,7 +16,8 @@ RSpec.describe BooksController, type: :controller do
   describe '#show' do
     it 'must change page title to book title' do
       book = FactoryGirl.build(:book)
-      @instance.instance_variable_set(:@book, book)
+      allow(@instance).to receive_message_chain(:params, :[])
+      allow(Book).to receive(:find) { book }
       expect{@instance.show}.to change{@instance.instance_variable_get(:@page_title)}.to(book.title)
     end
   end
