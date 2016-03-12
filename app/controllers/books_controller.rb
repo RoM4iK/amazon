@@ -14,9 +14,5 @@ class BooksController < ApplicationController
     @category = Category.find(params[:category])
     @books = Book.where(category: @category).limit(12)
   end
-
-  private
-    def book_params
-      params[:book]
-    end
+  
 end
