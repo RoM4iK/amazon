@@ -13,7 +13,7 @@ class Order < ActiveRecord::Base
     def add_item(book, quantity = 1)
         order_item = order_items.find_by({book: book})
         if (order_item)
-           order_item.update_quantity(order_item.quantity + 1)
+           order_item.update_quantity(order_item.quantity + quantity)
            order_item.save
         else
             order_items.create({book: book, quantity: quantity, price: book.price * quantity})
