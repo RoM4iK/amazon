@@ -6,7 +6,7 @@ class CartController < ApplicationController
   end
 
   def add
-    book = Book.find(params[:book])
+    book = Book.find(params[:book].to_i)
     @order.add_item(book, params[:quantity].to_i)
     flash.notice = 'Book added to your cart'
     redirect_to :root
