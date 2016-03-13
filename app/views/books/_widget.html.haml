@@ -1,16 +1,16 @@
 !!!
-.col-sm-4.col-lg-4.col-md-4
+.col-sm-4.col-lg-4.col-md-4.book-widget
   .thumbnail
     %img{:alt => "", :src => "http://placehold.it/320x150"}/
     .caption
-      %h4.pull-right
+      %h4.pull-right.price
         = "#{book.price}$"
-      %h4
+      %h4.title
         %a{:href => "#{book_path(book)}"}
           = book.title
-      %p 
+      %p.category
         = book.category.title
-      %p
+      %p.author
         = book.author.full_name
     .ratings
       %p.pull-right= pluralize(book.ratings.count, "review")

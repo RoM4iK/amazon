@@ -1,6 +1,6 @@
 require 'rails_helper'
 include DeviseHelpers
- 
+
 describe 'devise/registrations/new', type: :view do
   before do
     render
