@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe CartHelper, :not_verify_doubles do
+describe CartHelper, :not_verify_doubles, type: :helper do
   before do
     @helper = Object.new.extend CartHelper
     @book = FactoryGirl.build(:book)

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe ApplicationHelper, :not_verify_doubles do
+describe ApplicationHelper, :not_verify_doubles, type: :helper do
   before do
     @helper = Object.new.extend ApplicationHelper
     @session = Hash.new
