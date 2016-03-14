@@ -1,6 +1,6 @@
 %div
   %h1
     = @category.title
-  
-  .row
+
+  .row.books-list
     = render :partial => "books/widget", :collection => @books, :as => :book
