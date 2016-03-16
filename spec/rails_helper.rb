@@ -54,6 +54,16 @@ RSpec.configure do |config|
   config.after(:each) do
     DatabaseCleaner.clean
   end
+
+  config.include Warden::Test::Helpers
+  config.before :suite do
+    Warden.test_mode!
+  end
+
+  config.after :each, type: :feature do
+    Warden.test_reset!
+  end
+
   # Filter lines from Rails gems in backtraces.
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:

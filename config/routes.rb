@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :customers
-  
+
   root 'site#index'
-  
+
   get '/' => 'site#index'
   get '/about' => 'site#about'
   get '/contact' => 'site#contact'
@@ -12,7 +12,7 @@ Rails.application.routes.draw do
       get 'category/:category', action: 'category'
     end
   end
-  
+
   scope 'cart' do
     get '/' => 'cart#index', as: 'cart'
     post 'add' => 'cart#add'
@@ -73,5 +73,5 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-  
+
 end
