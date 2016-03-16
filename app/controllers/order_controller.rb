@@ -1,4 +1,4 @@
-class CartController < ApplicationController
+class OrderController < ApplicationController
   include ApplicationHelper
   before_action :get_current_order
 

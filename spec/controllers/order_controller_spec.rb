@@ -1,5 +1,5 @@
 require 'rails_helper'
-RSpec.describe CartController, type: :controller do
+RSpec.describe OrderController, type: :controller do
   describe '#add' do
     before do
       @book = FactoryGirl.create(:book)
@@ -30,7 +30,7 @@ RSpec.describe CartController, type: :controller do
       @quantity = 10
       @order.add_item(@book)
       @order_item = @order.order_items.where(book: @book).first
-      allow_any_instance_of(CartController).to receive(:current_order) { @order }
+      allow_any_instance_of(OrderController).to receive(:current_order) { @order }
     end
     it 'must update quantity of order item' do
       expect(@order).to receive(:update_quantity).with(@order_item, @quantity)

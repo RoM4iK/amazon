@@ -14,9 +14,9 @@ Rails.application.routes.draw do
   end
 
   scope 'cart' do
-    get '/' => 'cart#index', as: 'cart'
-    post 'add' => 'cart#add'
-    post 'change' => 'cart#change_quantity'
+    get '/' => 'order#index', as: 'cart'
+    post 'add' => 'order#add'
+    post 'change' => 'order#change_quantity'
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -22,7 +22,7 @@
                     %td
                         = "#{item.book.price}$"
                     %td
-                        = render partial: "cart/quantity_form", locals: {item: item}
+                        = render partial: "order/quantity_form", locals: {item: item}
                     %td
                         = "#{item.price}$"
         %tfoot
@@ -33,4 +33,3 @@
                     = @order.order_items.sum(:quantity)
                 %th
                     = "#{@order.price}$"
-                        
