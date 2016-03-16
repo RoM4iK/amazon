@@ -1,0 +1,10 @@
+%h1
+  Addresses
+= render partial: 'nav'
+.row
+  .col-sm-6
+    .panel.panel-primary.address-panel
+      .panel-heading
+        %h4 Billing address
+      .panel-body
+        = render partial: 'address_form', locals: { address: @billing_address }

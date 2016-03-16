@@ -5,10 +5,13 @@ class Order < ActiveRecord::Base
 
     belongs_to :customer
     belongs_to :credit_card
+
     has_many :order_items
 
-    validates :state, presence: true
+    belongs_to :billing_address, class_name: Address, foreign_key: :billing_address
+    belongs_to :shipping_address, class_name: Address, foreign_key: :shipping_address
 
+    validates :state, presence: true
 
     def add_item(book, quantity = 1)
         order_item = order_items.find_by({book: book})

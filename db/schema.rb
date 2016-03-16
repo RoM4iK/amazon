@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160308034950) do
+ActiveRecord::Schema.define(version: 20160316220737) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,9 +21,9 @@ ActiveRecord::Schema.define(version: 20160308034950) do
     t.string   "zipcode"
     t.string   "city"
     t.string   "phone"
-    t.string   "country"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "country_id"
   end
 
   create_table "authors", force: :cascade do |t|
@@ -92,6 +92,12 @@ ActiveRecord::Schema.define(version: 20160308034950) do
 
   add_index "customers", ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true, using: :btree
 
+  create_table "deliveries", force: :cascade do |t|
+    t.string  "name"
+    t.string  "description"
+    t.integer "price"
+  end
+
   create_table "order_items", force: :cascade do |t|
     t.integer  "price"
     t.integer  "quantity"
@@ -114,6 +120,7 @@ ActiveRecord::Schema.define(version: 20160308034950) do
     t.integer  "credit_card_id"
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
+    t.integer  "delivery_id"
   end
 
   add_index "orders", ["credit_card_id"], name: "index_orders_on_credit_card_id", using: :btree
