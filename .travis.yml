@@ -19,3 +19,4 @@ deploy:
   app: rom4ik-amazon
   on:
     repo: RoM4iK/amazon
+    run: "rake db:migrate"
