@@ -13,10 +13,11 @@ class CheckoutController < ApplicationController
         billing
       when :shipping
         shipping
-      when :delivery
-        delivery
       when :payment
         payment
+      when :confirmation
+        #confirmation can redirect to other step, or render wizard
+        return confirmation
     end
     render_wizard
   end
@@ -38,15 +39,14 @@ class CheckoutController < ApplicationController
 
   def get_current_order
     @order = current_customer.current_order
-    @billing_address = @order.billing_address || Address.new
-    @shipping_address = @order.shipping_address || Address.new
-    @credit_card = @order.credit_card || CreditCard.new
   end
 
   def billing
+    @billing_address = @order.billing_address || Address.new
   end
 
   def update_billing
+    @billing_address = @order.billing_address || Address.new
     @billing_address.attributes = params.require(:address).permit(:address, :zipcode, :city, :phone, :country_id)
     @billing_address.save
     @order.billing_address = @billing_address
@@ -55,10 +55,12 @@ class CheckoutController < ApplicationController
   end
 
   def shipping
+    @shipping_address = @order.shipping_address || Address.new
     @shipping_address = Address.new if @shipping_address == @order.billing_address
   end
 
   def update_shipping
+    @shipping_address = @order.shipping_address || Address.new
     @shipping_address = Address.new if @shipping_address == @order.billing_address
     if params.permit(:skip_shipping)[:skip_shipping] == "true"
       skip_shipping
@@ -74,11 +76,8 @@ class CheckoutController < ApplicationController
   end
 
   def skip_shipping
-    @order.shipping_address = @billing_address
+    @order.shipping_address = @order.billing_address
     @order.save!
-  end
-
-  def delivery
   end
 
   def update_delivery
@@ -87,9 +86,11 @@ class CheckoutController < ApplicationController
   end
 
   def payment
+    @credit_card = @order.credit_card || CreditCard.new
   end
 
   def update_payment
+    @credit_card = @order.credit_card || CreditCard.new
     @credit_card.attributes = params.require(:credit_card).permit(
       :number, :cvv, :expiration_month, :expiration_year, :first_name, :last_name
     )
@@ -97,5 +98,26 @@ class CheckoutController < ApplicationController
     @order.credit_card = @credit_card
     @order.save
     redirect_to next_wizard_path
+  end
+
+  def confirmation
+    if @order.billing_address.blank?
+      return redirect_with_message :billing, "You must fill the billing address"
+    end
+    if @order.shipping_address.blank?
+      return redirect_with_message :shipping, "You must fill the shipping address"
+    end
+    if @order.delivery.blank?
+      return redirect_with_message :delivery, "You must select the delivery method"
+    end
+    if @order.credit_card.blank?
+      return redirect_with_message :payment, "You must fill the credit card info"
+    end
+    render_wizard
+  end
+
+  def redirect_with_message(step, message)
+    flash[:alert] = message
+    redirect_to wizard_path(step)
   end
 end
