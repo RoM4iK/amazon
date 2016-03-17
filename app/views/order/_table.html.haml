@@ -1,0 +1,30 @@
+%table.table.table-bordered.table-hover
+    %thead
+        %tr
+            %th
+                Title
+            %th
+                Price
+            %th
+                Quantity
+            %th
+                Sum
+    %tbody
+        - @order.order_items.each do |item|
+            %tr
+                %td
+                    = item.book.title
+                %td
+                    = "#{item.book.price}$"
+                %td
+                    = render partial: "order/quantity_form", locals: {item: item}
+                %td
+                    = "#{item.price}$"
+    %tfoot
+        %tr
+            %th Total:
+            %th
+            %th
+                = @order.order_items.sum(:quantity)
+            %th
+                = "#{@order.price}$"

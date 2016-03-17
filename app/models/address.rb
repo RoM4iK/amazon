@@ -1,5 +1,5 @@
 class Address < ActiveRecord::Base
-    has_one :country
+    belongs_to :country
     belongs_to :customer
 
     validates :address, presence: true

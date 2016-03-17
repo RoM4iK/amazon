@@ -1,6 +1,31 @@
 %h1
   Address
 = render partial: 'nav'
+.row
+  .col-sm-6
+    .panel.panel-primary.address-panel
+      .panel-heading
+        Billing address
+      .panel-body
+        = @billing_address.address
+      .panel-heading
+        Shipping address
+      .panel-body
+        = @shipping_address.address
+      .panel-heading
+        Delivery
+      .panel-body
+        = @order.delivery && @order.delivery.name
+      .panel-heading
+        Payment
+      .panel-body
+        = @order.credit_card && @order.credit_card.number
+  .col-sm-6
+    .panel.panel-primary.address-panel
+      .panel-heading
+        Your cart
+      .panel-body
+        = render partial: 'order/table'
 %div
   %a{class: 'btn btn-primary'}
     Submit

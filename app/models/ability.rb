@@ -1,10 +1,11 @@
 class Ability
   include CanCan::Ability
-  def initialize(user)    
+  def initialize(user)
     if user && user.admin?
       can :access, :rails_admin
       can :dashboard
       can :manage, :all
     end
+    can :manage, Address, customer_id: user.id
   end
 end

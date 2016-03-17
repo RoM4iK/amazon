@@ -5,7 +5,9 @@
   .col-sm-6
     .panel.panel-primary.address-panel
       .panel-heading
-        .btn.btn-warning.btn-default.pull-right Use billing address
+        = form_tag checkout_path, method: :put do
+          = hidden_field_tag :skip_shipping, true
+          = submit_tag 'Use billing address', {class: 'btn btn-warning btn-default pull-right'}
         %h4 Shipping address
       .panel-body
         = render partial: 'address_form', locals: { address: @shipping_address}

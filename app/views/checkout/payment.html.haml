@@ -7,7 +7,7 @@
       .panel-heading
         %h4 Delivery
       .panel-body
-        = form_for @credit_card, url: {action: :update} do |f|
+        = form_for @credit_card, url: {action: :update}, method: :put do |f|
           .form-group
             = f.label :number
             = f.text_field :number, class: 'form-control'

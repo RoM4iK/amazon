@@ -12,7 +12,7 @@
 # It's strongly recommended that you check this file into your version control system.
 
 class CreateSchema < ActiveRecord::Migration
-  def change 
+  def change
     create_table "addresses", force: :cascade do |t|
       t.string   "address"
       t.string   "zipcode"
@@ -22,7 +22,7 @@ class CreateSchema < ActiveRecord::Migration
       t.datetime "created_at", null: false
       t.datetime "updated_at", null: false
     end
-  
+
     create_table "authors", force: :cascade do |t|
       t.string   "first_name"
       t.string   "last_name"
@@ -30,7 +30,7 @@ class CreateSchema < ActiveRecord::Migration
       t.datetime "created_at", null: false
       t.datetime "updated_at", null: false
     end
-  
+
     create_table "books", force: :cascade do |t|
       t.string   "title"
       t.text     "description"
@@ -41,27 +41,27 @@ class CreateSchema < ActiveRecord::Migration
       t.datetime "created_at",  null: false
       t.datetime "updated_at",  null: false
     end
-  
+
     add_index "books", ["author_id"], name: "index_books_on_author_id"
     add_index "books", ["category_id"], name: "index_books_on_category_id"
-  
+
     create_table "categories", force: :cascade do |t|
       t.string   "title"
       t.datetime "created_at", null: false
       t.datetime "updated_at", null: false
     end
-  
+
     create_table "countries", force: :cascade do |t|
       t.string   "name"
       t.integer  "address_id"
       t.datetime "created_at", null: false
       t.datetime "updated_at", null: false
     end
-  
+
     add_index "countries", ["address_id"], name: "index_countries_on_address_id"
-  
+
     create_table "credit_cards", force: :cascade do |t|
-      t.integer  "number"
+      t.string  "number"
       t.integer  "cvv"
       t.integer  "expiration_month"
       t.integer  "expiration_year"
@@ -71,9 +71,9 @@ class CreateSchema < ActiveRecord::Migration
       t.datetime "created_at",       null: false
       t.datetime "updated_at",       null: false
     end
-  
+
     add_index "credit_cards", ["customer_id"], name: "index_credit_cards_on_customer_id"
-  
+
     create_table "customers", force: :cascade do |t|
       t.string   "email"
       t.string   "encrypted_password", null: false
@@ -82,7 +82,7 @@ class CreateSchema < ActiveRecord::Migration
       t.datetime "created_at", null: false
       t.datetime "updated_at", null: false
     end
-  
+
     create_table "order_items", force: :cascade do |t|
       t.integer  "price"
       t.integer  "quantity"
@@ -91,10 +91,10 @@ class CreateSchema < ActiveRecord::Migration
       t.datetime "created_at", null: false
       t.datetime "updated_at", null: false
     end
-  
+
     add_index "order_items", ["book_id"], name: "index_order_items_on_book_id"
     add_index "order_items", ["order_id"], name: "index_order_items_on_order_id"
-  
+
     create_table "orders", force: :cascade do |t|
       t.integer  "price", default: 0
       t.date     "completed_date"
@@ -106,10 +106,10 @@ class CreateSchema < ActiveRecord::Migration
       t.datetime "created_at",       null: false
       t.datetime "updated_at",       null: false
     end
-  
+
     add_index "orders", ["credit_card_id"], name: "index_orders_on_credit_card_id"
     add_index "orders", ["customer_id"], name: "index_orders_on_customer_id"
-  
+
     create_table "ratings", force: :cascade do |t|
       t.text     "text"
       t.integer  "rate"
@@ -118,9 +118,9 @@ class CreateSchema < ActiveRecord::Migration
       t.datetime "created_at",  null: false
       t.datetime "updated_at",  null: false
     end
-  
+
     add_index "ratings", ["book_id"], name: "index_ratings_on_book_id"
     add_index "ratings", ["customer_id"], name: "index_ratings_on_customer_id"
-  
+
   end
 end
