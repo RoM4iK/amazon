@@ -10,14 +10,14 @@
             %th
                 Sum
     %tbody
-        - @order.order_items.each do |item|
+        - order.order_items.each do |item|
             %tr
                 %td
                     = item.book.title
                 %td
                     = "#{item.book.price}$"
                 %td
-                    = render partial: "order/quantity_form", locals: {item: item}
+                    = render partial: "orders/quantity_form", locals: {item: item}
                 %td
                     = "#{item.price}$"
     %tfoot
@@ -25,6 +25,6 @@
             %th Total:
             %th
             %th
-                = @order.order_items.sum(:quantity)
+                = order.order_items.sum(:quantity)
             %th
-                = "#{@order.price}$"
+                = "#{order.price}$"

@@ -1,0 +1,5 @@
+.panel.panel-primary.address-panel
+  .panel-heading
+    = "Order ##{order.id} from #{order.created_at.to_formatted_s(:short)}"
+  .panel-body
+    = render partial: 'table', locals: { order: order }

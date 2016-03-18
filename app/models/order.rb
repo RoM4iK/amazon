@@ -45,6 +45,7 @@ class Order < ActiveRecord::Base
         save
     end
 
-    scope :in_progress, -> { where("state != #{self::FINISHED}") }
+    scope :placed, -> { where("state != #{self::PAYMENT}") }
+
 
 end

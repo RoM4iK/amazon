@@ -14,10 +14,13 @@ Rails.application.routes.draw do
   end
 
   scope 'cart' do
-    get '/' => 'order#index', as: 'cart'
-    post 'add' => 'order#add'
-    post 'change' => 'order#change_quantity'
+    get '/' => 'orders#index', as: 'cart'
+    post 'add' => 'orders#add'
+    post 'change' => 'orders#change_quantity'
+    post 'submit' => 'orders#place'
   end
+
+  get '/orders' => 'orders#list'
 
   resources :checkout
 end

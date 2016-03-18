@@ -4,9 +4,9 @@ RSpec.describe Order, type: :model do
   it { is_expected.to belong_to(:credit_card) }
   it { is_expected.to belong_to(:customer) }
   it { is_expected.to have_many(:order_items) }
-    
+
   it { is_expected.to validate_presence_of(:state) }
-  
+
   describe '#add_item' do
     before do
       @book = FactoryGirl.build(:book)
@@ -46,7 +46,7 @@ RSpec.describe Order, type: :model do
     it 'deletes order_item' do
       expect { @order.remove_item(@order_item) }.to change{ @order.order_items.size }.from(1).to(0)
     end
-      
+
     it 'changes the total price of order' do
       expect { @order.remove_item(@order_item) }.to change{ @order.price }.from(@order_item.price).to(0)
     end
@@ -75,19 +75,19 @@ RSpec.describe Order, type: :model do
       end
     end
   end
-  describe '#in_progress' do
+  describe '#placed' do
     before do
       @customer = FactoryGirl.create(:customer)
       FactoryGirl.create(:order, customer: @customer, state: Order::PAYMENT)
       FactoryGirl.create(:order, customer: @customer, state: Order::FINISHED)
     end
     it 'must return orders' do
-      expect(@customer.orders.in_progress).to all( be_a(Order) )
+      expect(@customer.orders.placed).to all( be_a(Order) )
     end
-    it 'must not return finished orders' do
-      expect(@customer.orders.in_progress).to all( have_attributes(state: Order::PAYMENT) )
+    it 'must not return not placed orders' do
+      expect(@customer.orders.placed).to all( have_attributes(state: Order::FINISHED) )
     end
   end
-  
- 
+
+
 end
