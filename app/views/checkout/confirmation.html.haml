@@ -25,6 +25,6 @@
       .panel-heading
         Your cart
       .panel-body
-        = render partial: 'orders/table', locals: {order: @order}
+        = render partial: 'orders/table', locals: {order: @order, editable: true}
 %div
   =link_to 'Submit', {controller: :orders, action: :place}, {class: 'btn btn-primary', method: :post}

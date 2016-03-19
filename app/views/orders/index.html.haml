@@ -3,6 +3,6 @@
     %h3 Cart is empty.
 - else
     %h3= "You have #{pluralize(@order.order_items.count, 'items')} in your cart."
-    = render partial: 'table', locals: { order: @order }
+    = render partial: 'table', locals: { order: @order, editable: true }
     %div
         = link_to 'Checkout', checkout_index_path, { class: 'btn btn-primary pull-right' }
