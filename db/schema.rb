@@ -21,10 +21,13 @@ ActiveRecord::Schema.define(version: 20160316220737) do
     t.string   "zipcode"
     t.string   "city"
     t.string   "phone"
+    t.integer  "customer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "country_id"
   end
+
+  add_index "addresses", ["customer_id"], name: "index_addresses_on_customer_id"
 
   create_table "authors", force: :cascade do |t|
     t.string   "first_name"
@@ -65,7 +68,7 @@ ActiveRecord::Schema.define(version: 20160316220737) do
 
   create_table "credit_cards", force: :cascade do |t|
     t.string   "number"
-    t.integer  "cvv"
+    t.string   "cvv"
     t.integer  "expiration_month"
     t.integer  "expiration_year"
     t.string   "first_name"

@@ -5,8 +5,18 @@
   .col-sm-6
     .panel.panel-primary.address-panel
       .panel-heading
-        %h4 Delivery
+        %h4 Payment info
       .panel-body
+        - if @customer_credit_cards.present?
+          %h4
+            %strong Your credit cards
+          = form_for @order, url: {action: :update} do |f|
+            = f.collection_radio_buttons(:credit_card_id, @customer_credit_cards, :id, :number) do |b|
+              .radio
+                = b.label(class: "radio_button") { b.radio_button(class: "radio_button") + b.text  }
+            = f.submit("Save", {class: 'btn btn-primary'})
+        %h4
+          %strong New credit card
         = form_for @credit_card, url: {action: :update}, method: :put do |f|
           .form-group
             = f.label :number

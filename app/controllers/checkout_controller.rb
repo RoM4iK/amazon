@@ -94,16 +94,25 @@ class CheckoutController < ApplicationController
 
   def payment
     @credit_card = @order.credit_card || CreditCard.new
+    @customer_credit_cards = current_customer.credit_cards.all
   end
 
   def update_payment
-    @credit_card = @order.credit_card || CreditCard.new
-    @credit_card.attributes = params.require(:credit_card).permit(
-      :number, :cvv, :expiration_month, :expiration_year, :first_name, :last_name
-    )
-    @credit_card.save!
-    @order.credit_card = @credit_card
-    @order.save
+    order_params = params.permit(:order).permit(:credit_card_id)
+    if order_params[:order] && order_params[:order][:credit_card_id]
+      @order.update order_params
+    else
+      @credit_card = @order.credit_card || CreditCard.new
+      if @credit_card.orders.count > 0
+        @credit_card = CreditCard.new
+      end
+      @credit_card.attributes = params.require(:credit_card).permit(
+        :number, :cvv, :expiration_month, :expiration_year, :first_name, :last_name
+      )
+      @credit_card.save!
+      @order.credit_card = @credit_card
+      @order.save
+    end
     redirect_to next_wizard_path
   end
 
