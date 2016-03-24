@@ -11,12 +11,10 @@
           %h4
             %strong Your credit cards
           = form_for @order, url: {action: :update} do |f|
-            = f.collection_radio_buttons(:credit_card_id, @customer_credit_cards, :id, :number) do |b|
-              .radio
-                = b.label(class: "radio_button") { b.radio_button(class: "radio_button") + b.text  }
-            = f.submit("Save", {class: 'btn btn-primary'})
+            = f.collection_select(:credit_card_id, @customer_credit_cards, :id, :number)
+            = f.submit("Select", {class: 'btn btn-primary'})
         %h4
-          %strong New credit card
+          %strong Credit card info
         = form_for @credit_card, url: {action: :update}, method: :put do |f|
           .form-group
             = f.label :number
@@ -37,4 +35,4 @@
             = f.label :last_name
             = f.text_field :last_name, class: 'form-control'
           .form-group
-            = f.submit "Save", {class: 'btn btn-primary'}
+            = f.submit @card_not_editable ? "Create" : "Update", {class: 'btn btn-primary'}

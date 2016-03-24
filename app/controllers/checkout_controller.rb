@@ -1,5 +1,8 @@
 class CheckoutController < ApplicationController
   include Wicked::Wizard
+  include Checkout::Addresses
+  include Checkout::Delivery
+  include Checkout::Payment
 
   before_action :authenticate_customer!
   before_action :get_current_order
@@ -41,79 +44,6 @@ class CheckoutController < ApplicationController
 
   def get_current_order
     @order = current_customer.current_order
-  end
-
-  def billing
-    @billing_address = @order.billing_address || Address.new
-  end
-
-  def update_billing
-    @billing_address = @order.billing_address || Address.new
-    @billing_address.attributes = params.require(:address).permit(:address, :zipcode, :city, :phone, :country_id)
-    @billing_address.save!
-    @order.billing_address = @billing_address
-    @order.save
-    redirect_to next_wizard_path
-  end
-
-  def shipping
-    @shipping_address = @order.shipping_address || Address.new
-    @shipping_address = Address.new if @shipping_address == @order.billing_address
-  end
-
-  def update_shipping
-    @shipping_address = @order.shipping_address || Address.new
-    @shipping_address = Address.new if @shipping_address == @order.billing_address
-    if params.permit(:skip_shipping)[:skip_shipping] == "true"
-      skip_shipping
-    else
-      @shipping_address.attributes = params.require(:address).permit(
-        :address, :zipcode, :city, :phone, :country_id
-      )
-      @shipping_address.save!
-      @order.shipping_address = @shipping_address
-      @order.save
-    end
-    redirect_to next_wizard_path
-  end
-
-  def skip_shipping
-    @order.shipping_address = @order.billing_address
-    @order.save
-  end
-
-  def update_delivery
-    begin
-      @order.update params.require(:order).permit(:delivery_id)
-      redirect_to next_wizard_path
-    rescue ActionController::ParameterMissing
-      flash.now[:alert] = "You must select delivery method"
-      render_wizard
-    end
-  end
-
-  def payment
-    @credit_card = @order.credit_card || CreditCard.new
-    @customer_credit_cards = current_customer.credit_cards.all
-  end
-
-  def update_payment
-    order_params = params.permit(:order).permit(:credit_card_id)
-    if order_params[:order] && order_params[:order][:credit_card_id]
-      @order.update order_params
-    else
-      @credit_card = @order.credit_card || CreditCard.new
-      if @credit_card.orders.count > 0
-        @credit_card = CreditCard.new
-      end
-      @credit_card.attributes = params.require(:credit_card).permit(
-        :number, :cvv, :expiration_month, :expiration_year, :first_name, :last_name
-      )
-      @credit_card.save!
-      @order.credit_card = @credit_card
-      @order.save
-    end
-    redirect_to next_wizard_path
   end
 
   def confirmation
