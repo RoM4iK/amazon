@@ -35,4 +35,4 @@
             = f.label :last_name
             = f.text_field :last_name, class: 'form-control'
           .form-group
-            = f.submit @card_not_editable ? "Create" : "Update", {class: 'btn btn-primary'}
+            = f.submit @card_editable ? "Update" : "Save", {class: 'btn btn-primary'}
