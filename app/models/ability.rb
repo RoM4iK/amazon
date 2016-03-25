@@ -6,6 +6,5 @@ class Ability
       can :dashboard
       can :manage, :all
     end
-    can :manage, Address, customer_id: user.id
   end
 end

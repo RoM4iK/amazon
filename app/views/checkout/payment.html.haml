@@ -5,8 +5,16 @@
   .col-sm-6
     .panel.panel-primary.address-panel
       .panel-heading
-        %h4 Delivery
+        %h4 Payment info
       .panel-body
+        - if @customer_credit_cards.present?
+          %h4
+            %strong Your credit cards
+          = form_for @order, url: {action: :update} do |f|
+            = f.collection_select(:credit_card_id, @customer_credit_cards, :id, :number)
+            = f.submit("Select", {class: 'btn btn-primary'})
+        %h4
+          %strong Credit card info
         = form_for @credit_card, url: {action: :update}, method: :put do |f|
           .form-group
             = f.label :number
@@ -27,4 +35,4 @@
             = f.label :last_name
             = f.text_field :last_name, class: 'form-control'
           .form-group
-            = f.submit "Save", {class: 'btn btn-primary'}
+            = f.submit @card_editable ? "Update" : "Save", {class: 'btn btn-primary'}

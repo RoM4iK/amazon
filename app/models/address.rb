@@ -7,5 +7,9 @@ class Address < ActiveRecord::Base
     validates :city, presence: true
     validates :phone, presence: true
     validates :country, presence: true
+    
+    def orders
+        Order.where("billing_address = ? OR shipping_address = ?", self.id, self.id)
+    end
 
 end

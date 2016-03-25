@@ -5,6 +5,7 @@ class Customer < ActiveRecord::Base
   has_many :orders
   has_many :ratings
   has_many :addresses
+  has_many :credit_cards
 
   validates :first_name, presence: true
   validates :last_name, presence: true

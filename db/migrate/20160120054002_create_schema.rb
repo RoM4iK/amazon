@@ -19,9 +19,12 @@ class CreateSchema < ActiveRecord::Migration
       t.string   "city"
       t.string   "phone"
       t.string   "country"
+      t.integer  "customer_id"
       t.datetime "created_at", null: false
       t.datetime "updated_at", null: false
     end
+
+    add_index "addresses", ["customer_id"], name: "index_addresses_on_customer_id"
 
     create_table "authors", force: :cascade do |t|
       t.string   "first_name"
@@ -62,7 +65,7 @@ class CreateSchema < ActiveRecord::Migration
 
     create_table "credit_cards", force: :cascade do |t|
       t.string  "number"
-      t.integer  "cvv"
+      t.string  "cvv"
       t.integer  "expiration_month"
       t.integer  "expiration_year"
       t.string   "first_name"

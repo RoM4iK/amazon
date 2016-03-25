@@ -15,14 +15,20 @@
                 %td
                     = item.book.title
                 %td
-                    = "#{item.book.price}$"
+                    - if editable
+                        = "#{item.book.price}$"
+                    - else
+                        = "#{item.price / item.quantity}$"
                 %td
                     - if editable
                         = render partial: "orders/quantity_form", locals: {item: item}
                     - else
                         = item.quantity
                 %td
-                    = "#{item.price}$"
+                    - if editable
+                        = "#{item.book.price * item.quantity}$"
+                    - else
+                        = "#{item.price}$"
     %tfoot
         %tr
             %th Total:
