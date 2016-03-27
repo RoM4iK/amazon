@@ -11,7 +11,7 @@
           %h4
             %strong Your addresses
           = form_for @order, url: {action: :update} do |f|
-            = f.collection_select(:billing_address, @customer_addresses, :id, :address, {:selected => @order.billing_address.id.to_i})
+            = f.collection_select(:billing_address, @customer_addresses, :id, :address, {:selected => @order.billing_address ? @order.billing_address.id.to_i : nil})
             = f.submit("Select", {class: 'btn btn-primary'})
         %h4 Address info
         = render partial: 'address_form', locals: { address: @billing_address }

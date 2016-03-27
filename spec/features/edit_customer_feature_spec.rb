@@ -1,5 +1,4 @@
 require 'rails_helper'
-include Warden::Test::Helpers
 
 feature "Edit customer" do
   before do
