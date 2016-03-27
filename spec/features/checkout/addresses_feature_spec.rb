@@ -31,7 +31,7 @@ feature "Checkout addresses" do
       end
       scenario "Should change the selected address in address form" do
         visit checkout_path(id: :billing)
-        expect(page).to have_selector('form.edit_order option[selected="selected"]'), with: @address.address
+        expect(page).to have_selector('form.edit_order option[selected="selected"]', text: @address.address)
       end
     end
   end
@@ -52,7 +52,7 @@ feature "Checkout addresses" do
         click_button('Use billing address')
       end
       visit checkout_path(id: :shipping)
-      expect(page).to have_selector('form.edit_order option[selected="selected"]'), with: @address.address
+      expect(page).to have_selector('form.edit_order option[selected="selected"]', text: @address.address)
     end
   end
 end
