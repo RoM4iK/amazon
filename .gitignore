@@ -19,3 +19,5 @@
 #Ingore ruby gemset and version
 .ruby-gemset
 .ruby-version
+
+.byebug_history

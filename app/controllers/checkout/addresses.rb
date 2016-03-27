@@ -18,7 +18,7 @@ module Checkout::Addresses
     end
     redirect_to next_wizard_path
   end
-  
+
   def shipping
     get_customer_addresses
     @shipping_address = @order.shipping_address || current_customer.addresses.new
@@ -51,33 +51,34 @@ module Checkout::Addresses
     @order.update shipping_address: @order.billing_address
     @order.save
   end
-  
+
   private
-    
+
   def address_have_no_orders?(address = nil)
     return false if address === nil
+    return false unless address.id
     return address.orders.placed.count == 0
   end
-  
+
   def address_selected?
     order_params = params.permit(order: [:shipping_address, :billing_address])
     if order_params[:order]
       @order.update find_selected_address! order_params[:order]
     end
   end
-  
+
   def find_selected_address!(order)
     order[:shipping_address] = current_customer.addresses.find order[:shipping_address] if order[:shipping_address]
     order[:billing_address] = current_customer.addresses.find order[:billing_address] if order[:billing_address]
     order
   end
-  
+
   def get_customer_addresses
     @customer_addresses = current_customer.addresses.all
   end
-  
+
   def get_address_editability(address)
     @address_editable = address_have_no_orders?(address)
   end
-  
+
 end
