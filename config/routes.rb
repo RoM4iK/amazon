@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'ratings/create'
-
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :customers
 
