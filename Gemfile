@@ -11,12 +11,12 @@ gem 'devise'
 gem 'rails_admin'
 gem 'cancancan', '~> 1.10'
 gem 'wicked'
+gem 'factory_girl_rails'
+gem 'faker'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
-  gem 'faker'
   gem 'byebug'
-  gem 'factory_girl_rails'
 end
 
 group :test do
