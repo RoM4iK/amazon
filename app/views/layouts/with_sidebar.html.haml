@@ -5,6 +5,9 @@
     = render :partial => 'layouts/nav'
     .container
       .row
+        .col-sm-12
+          = render :partial => 'layouts/flash_messages'
+      .row
         .col-md-3
           %p.lead Shop Name
           = render :partial => "site/categories"

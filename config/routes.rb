@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'ratings/create'
+
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :customers
 
@@ -11,6 +13,7 @@ Rails.application.routes.draw do
     collection do
       get 'category/:category', action: 'category'
     end
+    resources :ratings, only: :create
   end
 
   scope 'cart' do

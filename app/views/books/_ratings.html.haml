@@ -1,7 +1,7 @@
-%hr/
 .row
   .col-md-12
     = render partial: "stars", locals: {count: rating.rate}
     = rating.customer.full_name
     %span.pull-right= "#{time_ago_in_words(rating.created_at)} ago"
     %p= rating.text
+%hr/

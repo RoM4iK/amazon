@@ -1,0 +1,9 @@
+=form_for Rating.new, {url: book_ratings_path(book_id: book), method: :post} do |f|
+  .form-group
+    = f.label :text
+    = f.text_area :text, class: 'form-control'
+  .form-group
+    = f.label :rate
+    = f.select :rate, (1..5).to_a, class: 'form-control'
+  .form-group.text-right
+    = f.submit "Leave a Review", class: 'btn btn-success'
