@@ -1,5 +1,7 @@
 class RatingsController < ApplicationController
+  before_action :authenticate_customer!
   load_and_authorize_resource
+  
   def create
     book = Book.find(params[:book_id])
     @rating.book = book
