@@ -12,5 +12,4 @@
 //
 //= require jquery/dist/jquery.min
 //= require jquery-ujs
-//= require bootstrap-sass/assets/javascripts/bootstrap.min
 //= require_tree .

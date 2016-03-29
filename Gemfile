@@ -13,6 +13,7 @@ gem 'cancancan', '~> 1.10'
 gem 'wicked'
 gem 'factory_girl_rails'
 gem 'faker'
+gem 'bootstrap-sass'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
