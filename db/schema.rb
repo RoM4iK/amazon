@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160316220737) do
+ActiveRecord::Schema.define(version: 20160329192634) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,12 +22,12 @@ ActiveRecord::Schema.define(version: 20160316220737) do
     t.string   "city"
     t.string   "phone"
     t.integer  "customer_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.integer  "country_id"
   end
 
-  add_index "addresses", ["customer_id"], name: "index_addresses_on_customer_id"
+  add_index "addresses", ["customer_id"], name: "index_addresses_on_customer_id", using: :btree
 
   create_table "authors", force: :cascade do |t|
     t.string   "first_name"
@@ -88,6 +88,7 @@ ActiveRecord::Schema.define(version: 20160316220737) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.boolean  "admin"
+    t.string   "uid"
   end
 
   add_index "customers", ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true, using: :btree
