@@ -9,7 +9,6 @@ require 'shoulda'
 require 'database_cleaner'
 require 'capybara/rspec'
 require 'support/devise_helpers'
-require 'support/devise_macros'
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -69,6 +68,6 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
   config.include Devise::TestHelpers, :type => :controller
-  config.extend DeviseMacros, :type => :controller
+  config.include Devise::TestHelpers, :type => :view
 
 end

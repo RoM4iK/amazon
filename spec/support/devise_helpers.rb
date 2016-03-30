@@ -3,6 +3,10 @@ module DeviseHelpers
     :customer
   end
 
+  def resource_class
+    Customer
+  end
+  
   def resource
     @resource ||= Customer.new
   end
