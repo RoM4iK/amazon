@@ -38,19 +38,6 @@ RSpec.describe Order, type: :model do
       end
     end
   end
-  describe '#remove_item' do
-    before do
-      @order = FactoryGirl.create(:order, order_items_count: 1)
-      @order_item = @order.order_items.first
-    end
-    it 'deletes order_item' do
-      expect { @order.remove_item(@order_item) }.to change{ @order.order_items.size }.from(1).to(0)
-    end
-
-    it 'changes the total price of order' do
-      expect { @order.remove_item(@order_item) }.to change{ @order.price }.from(@order_item.price).to(0)
-    end
-  end
   describe '#update_quantity' do
     before do
       @order = FactoryGirl.create(:order, order_items_count: 1)

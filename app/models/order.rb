@@ -35,10 +35,6 @@ class Order < ActiveRecord::Base
       update_price!
     end
 
-    def remove_item(order_item, quantity = 1)
-       order_items.delete(order_item)
-       update_price!
-    end
 
     def update_price!
         self.price = order_items.sum("price")
