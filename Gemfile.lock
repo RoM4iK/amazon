@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/RoM4iK/shopper-engine.git
-  revision: a45a3ccd3bbdbcc6c590d6338fa9133aaa66b1e9
+  revision: 9681e9b4fcdaa746827d7f1521242ecc7333f82b
   specs:
     shopper_engine (0.1.0)
       haml-rails (~> 0.9)

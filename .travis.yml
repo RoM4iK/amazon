@@ -12,11 +12,3 @@ before_script:
 addons:
   code_climate:
     repo_token: 5f66f81f3b2a275f301c0c49d6ea6a4229088f45c42660b7254085655f217a45
-deploy:
-  provider: heroku
-  api_key:
-    secure: jb8kH1y25ZIHODx13n6+Or9J35S/EhdnBhzqk86SiPuDNhL6u+BNueUmPMYYAXncI2Lpv0vqBgich1oFw3bte4VSQGfSGY37B3NyZh651UG9CIKKkfg0oI1dj1S0x2u8dIuWdbCC2RRt6kMrax8ID3jmVy+JKWuS2ItrJQRIWEbddG4LnopnYFOmCQS+PwtrrtH/ptZNeXSDEFNCMpnMZcXGviWiguC7xNTjw5iRkoF9Y56ewceIJoUwaPW5Ua2alxy/rL6QPff/hE2/YJtaKmfUp+D+kcy6Vex62BSbg1VMPa0m3OR/w1ZxLXnHqBs3SzX//HOjUUp5xJjZ9KFHKtnCi5R4odj3fk2T+7Y3lcddC1snyhqvUgsMZZWopaJrCp7P/p1M+suNn0ACtyZWefUliKQgUD8CoAkPMYpq3Nmmf8V9zNO/XyMT8CL1DWE/v/MQKivDlf1R/dlMDPtz210rZtGrquOVIXVpuDHDC9R1rWCKO7xdob4Xho0DK3J9iHURT2LlmiSNelE8woZGhsYl8G55Eh/1EDM+/iwT6bywROGzIyYFu0mBIWIYfxXaRV/ZeQ/iLSL+EPwsiMoOR9cZrN35AqDxzSsAfLv/bL/OMB7FTTQaPUQTL8PsmmQPYLB/l/K3HMb8shYmU86nS5f/Y/34i790QLmx4u8ayx4=
-  app: rom4ik-amazon
-  on:
-    repo: RoM4iK/amazon
-    run: "rake db:migrate"
