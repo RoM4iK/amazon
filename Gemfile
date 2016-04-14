@@ -17,10 +17,10 @@ gem 'faker'
 gem 'bootstrap-sass'
 gem 'omniauth-facebook'
 gem 'shopper_engine', github: "RoM4iK/shopper-engine"
+gem 'byebug'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
-  gem 'byebug'
 end
 
 group :test do
