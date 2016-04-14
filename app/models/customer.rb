@@ -3,10 +3,9 @@ class Customer < ActiveRecord::Base
          :recoverable, :rememberable, :validatable,
          :omniauthable, :omniauth_providers => [:facebook]
 
-  has_many :orders
+  acts_as_customer
+
   has_many :ratings
-  has_many :addresses
-  has_many :credit_cards
 
   validates :first_name, presence: true
   validates :last_name, presence: true
@@ -17,10 +16,6 @@ class Customer < ActiveRecord::Base
 
   def admin?
     self.admin
-  end
-
-  def current_order
-     orders.where("state = #{Order::PAYMENT}").first || orders.create!(state: Order::PAYMENT)
   end
 
   def self.from_omniauth(auth)

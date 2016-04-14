@@ -25,3 +25,46 @@ Category.all.each do |category|
     FactoryGirl.create(:book, author: authors[rand(0..AUTHORS_COUNT)], category: category, ratings_count: rand(0...5))
   end
 end
+
+#seed delivieries
+delivieries = [
+  {
+    name: 'NewPost',
+    price: '30',
+    description: 'Delivery in 2-3 days'
+  },
+  {
+    name: 'Ukrainian Post',
+    price: '0',
+    description: 'Delivery in 30-90 days'
+  },
+  {
+    name: 'Slowpoke',
+    price: '0',
+    description: 'Delivery in 10-14 days'
+  },
+]
+
+ShopperEngine::Delivery.create(delivieries)
+
+#seed countries
+
+countries = [
+  {
+    name: "Ukraine"
+  },
+  {
+    name: "Russian Federation"
+  },
+  {
+    name: "Belarus"
+  },
+  {
+    name: "United States"
+  },
+  {
+    name: "North Korea"
+  }
+]
+
+ShopperEngine::Country.create(countries)

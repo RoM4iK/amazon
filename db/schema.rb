@@ -11,23 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160329192634) do
+ActiveRecord::Schema.define(version: 20160413234106) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "addresses", force: :cascade do |t|
-    t.string   "address"
-    t.string   "zipcode"
-    t.string   "city"
-    t.string   "phone"
-    t.integer  "customer_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.integer  "country_id"
-  end
-
-  add_index "addresses", ["customer_id"], name: "index_addresses_on_customer_id", using: :btree
 
   create_table "authors", force: :cascade do |t|
     t.string   "first_name"
@@ -57,29 +44,6 @@ ActiveRecord::Schema.define(version: 20160329192634) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "countries", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "address_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "countries", ["address_id"], name: "index_countries_on_address_id", using: :btree
-
-  create_table "credit_cards", force: :cascade do |t|
-    t.string   "number"
-    t.string   "cvv"
-    t.integer  "expiration_month"
-    t.integer  "expiration_year"
-    t.string   "first_name"
-    t.string   "last_name"
-    t.integer  "customer_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-  end
-
-  add_index "credit_cards", ["customer_id"], name: "index_credit_cards_on_customer_id", using: :btree
-
   create_table "customers", force: :cascade do |t|
     t.string   "email"
     t.string   "encrypted_password",     null: false
@@ -102,34 +66,6 @@ ActiveRecord::Schema.define(version: 20160329192634) do
     t.integer "price"
   end
 
-  create_table "order_items", force: :cascade do |t|
-    t.integer  "price"
-    t.integer  "quantity"
-    t.integer  "book_id"
-    t.integer  "order_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "order_items", ["book_id"], name: "index_order_items_on_book_id", using: :btree
-  add_index "order_items", ["order_id"], name: "index_order_items_on_order_id", using: :btree
-
-  create_table "orders", force: :cascade do |t|
-    t.integer  "price",            default: 0
-    t.date     "completed_date"
-    t.integer  "state"
-    t.integer  "shipping_address"
-    t.integer  "billing_address"
-    t.integer  "customer_id"
-    t.integer  "credit_card_id"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
-    t.integer  "delivery_id"
-  end
-
-  add_index "orders", ["credit_card_id"], name: "index_orders_on_credit_card_id", using: :btree
-  add_index "orders", ["customer_id"], name: "index_orders_on_customer_id", using: :btree
-
   create_table "ratings", force: :cascade do |t|
     t.text     "text"
     t.integer  "rate"
@@ -141,5 +77,67 @@ ActiveRecord::Schema.define(version: 20160329192634) do
 
   add_index "ratings", ["book_id"], name: "index_ratings_on_book_id", using: :btree
   add_index "ratings", ["customer_id"], name: "index_ratings_on_customer_id", using: :btree
+
+  create_table "shopper_engine_addresses", force: :cascade do |t|
+    t.string   "phone"
+    t.string   "address"
+    t.string   "zipcode"
+    t.string   "city"
+    t.integer  "country_id"
+    t.integer  "customer_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "shopper_engine_countries", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "address_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "shopper_engine_credit_cards", force: :cascade do |t|
+    t.string   "number"
+    t.string   "cvv"
+    t.integer  "expiration_month"
+    t.integer  "expiration_year"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.integer  "customer_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  create_table "shopper_engine_deliveries", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.integer  "price"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "shopper_engine_order_items", force: :cascade do |t|
+    t.integer  "price"
+    t.integer  "quantity"
+    t.integer  "product_id"
+    t.string   "product_type"
+    t.integer  "order_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  create_table "shopper_engine_orders", force: :cascade do |t|
+    t.integer  "price",               default: 0
+    t.date     "completed_date"
+    t.integer  "state"
+    t.integer  "shipping_address_id"
+    t.integer  "billing_address_id"
+    t.integer  "customer_id"
+    t.integer  "credit_card_id"
+    t.integer  "delivery_id"
+    t.datetime "placed_at"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+  end
 
 end

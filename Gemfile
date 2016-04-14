@@ -16,6 +16,7 @@ gem 'factory_girl_rails'
 gem 'faker'
 gem 'bootstrap-sass'
 gem 'omniauth-facebook'
+gem 'shopper_engine', github: "RoM4iK/shopper-engine"
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'

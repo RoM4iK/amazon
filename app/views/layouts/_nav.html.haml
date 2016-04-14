@@ -11,13 +11,9 @@
       %ul.nav.navbar-nav
         %li
           = link_to("Books", books_path)
-        %li
-          = link_to("About", {controller: "/site", action: "about"})
-        %li
-          = link_to("Contact", {controller: "/site", action: "contact"})
       %ul.nav.navbar-nav.navbar-right
         %li
-          = link_to("Cart (#{cart_total}$)", cart_path, id: 'cart')
+          = link_to("Cart (#{cart_total}$)", shopper_engine.cart_path, id: 'cart')
         %li
           - if current_customer
             %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
@@ -28,7 +24,7 @@
                   %li
                     = link_to("Edit profile",  edit_customer_registration_path)
                 %li
-                  = link_to("My orders", {controller: '/orders', action: 'list'})
+                  = link_to("My orders", shopper_engine.orders_path)
                 %li.divider{:role => "separator"}
                 %li
                   = link_to('Logout', destroy_customer_session_path, method: "delete")
